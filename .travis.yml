@@ -1,5 +1,10 @@
 language: java
-script: gradle dist -PsonatypeUsername=no -PsonatypePassword=no
+script: gradle dist
+
+# Hack dummy values into the gradle properties
+before_script:
+  - echo sonatypeUsername=none >> gradle.properties
+  - echo sonatypePassword=none >> gradle.properties
 
 deploy:
   provider: releases
