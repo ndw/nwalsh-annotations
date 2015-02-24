@@ -1,1 +1,10 @@
 language: java
+script: gradle dist
+
+deploy:
+  provider: releases
+  api_key:
+    secure: oTkoHvnr+gWBWeb7UlGbcNq+UBhRIZ+wNWGtye/6aHWBjSsW6fOTIkCnCeqEiOPuMElIGuJJCMm6uc7d+M+7CmN8YCMZvMb0RNGuHHnCgbh/DI1KsZKkG/S3sbXgJ1QgE/+bCWlUejMvM6T8YIXILmSOkNa6/CnB3V3sCBwUVTM=
+  file: build/distributions/nwalsh-annotations-$TRAVIS_TAG.zip
+  on:
+    repo: ndw/nwalsh-annotations

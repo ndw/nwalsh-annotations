@@ -29,3 +29,36 @@ sourceSets {
 jar {
   archiveName "nwalsh-annotations-" + version + ".jar"
 }
+
+task copyJar(dependsOn: jar, type: Copy) {
+  from "build/libs/nwalsh-annotations-" + version + ".jar"
+  into "build/dist"
+}
+
+task copyLicense(type: Copy) {
+  from "LICENSE.md"
+  into "build/dist"
+}
+
+task copyReadme(type: Copy) {
+  from "README.md"
+  into "build/dist"
+}
+
+task copyDocs(dependsOn: [copyLicense, copyReadme]) {
+  // nop
+}
+
+task makeDist(dependsOn: [ build, copyJar, copyDocs ]) << {
+  println "Created distribution in build/dist"
+}
+
+task zipDist(dependsOn: makeDist, type: Zip) {
+  from('build/dist')
+  into 'nwalsh-annotations-' + version
+  archiveName 'nwalsh-annotations-' + version + ".zip"
+}
+
+task dist(dependsOn: zipDist) {
+  // nop
+}
