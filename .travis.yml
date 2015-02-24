@@ -2,7 +2,7 @@ language: java
 script: gradle dist
 
 # Hack dummy values into the gradle properties
-before_script:
+install:
   - echo sonatypeUsername=none >> gradle.properties
   - echo sonatypePassword=none >> gradle.properties
 
