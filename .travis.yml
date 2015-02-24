@@ -1,5 +1,5 @@
 language: java
-script: gradle dist
+script: gradle dist -PsonatypeUsername=no -PsonatypePassword=no
 
 deploy:
   provider: releases
