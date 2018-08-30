@@ -35,6 +35,10 @@ jar {
   archiveName "nwalsh-annotations-" + version + ".jar"
 }
 
+wrapper {
+    gradleVersion = '4.9'
+}
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from tasks.javadoc.destinationDir
