@@ -26,6 +26,8 @@ public @interface SaxonExtensionFunction {
      * to give quite assertive warnings (e.g. INFO). For classes that rely on third party
      * libraries that may or may not be present, a less assertive warning (e.g. DEBUG)
      * might be more reasonable.
+     *
+     * @return the warning level
      */
     String warnLevel() default "INFO";
 }
