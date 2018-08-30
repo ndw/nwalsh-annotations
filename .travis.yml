@@ -3,14 +3,16 @@ script: gradle dist
 
 # Hack dummy values into the gradle properties
 install:
-  - echo sonatypeUsername=none >> gradle.properties
-  - echo sonatypePassword=none >> gradle.properties
+- echo sonatypeUsername=none >> gradle.properties
+- echo sonatypePassword=none >> gradle.properties
 
 deploy:
   provider: releases
   api_key:
-    secure: oTkoHvnr+gWBWeb7UlGbcNq+UBhRIZ+wNWGtye/6aHWBjSsW6fOTIkCnCeqEiOPuMElIGuJJCMm6uc7d+M+7CmN8YCMZvMb0RNGuHHnCgbh/DI1KsZKkG/S3sbXgJ1QgE/+bCWlUejMvM6T8YIXILmSOkNa6/CnB3V3sCBwUVTM=
+    secure: bNofjjDEeXTD0aM/79ifb3sIhkBhZScDW/BXgIAbdIA8k+Q1bRXm+YkDyYJoY7eDlyrhK6TJ3TdaILKQ0bbrF+7eqzdmNKb6wptJrdr8Fh7fW+bqBnLc7awHr+0uGlmOSYV803IN3wXnDAxX1hR8xKOydvWausZygfLO9V9ODG8=
   file: build/distributions/nwalsh-annotations-$TRAVIS_TAG.zip
   on:
     tags: true
     branch: master
+    repo: ndw/nwalsh-annotations
+  skip_cleanup: true
