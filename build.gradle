@@ -92,42 +92,58 @@ signing {
   sign configurations.archives
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+def mavenPom = {
+  name 'annotations'
+  packaging 'jar'
+  description 'A set of global, public annotations'
+  url 'https://github.com/ndw/nwalsh-annotations'
 
-            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-              authentication(userName: sonatypeUsername, password: sonatypePassword)
-            }
+  scm {
+    url 'scm:git@github.com:ndw/nwalsh-annotations.git'
+    connection 'scm:git@github.com:ndw/nwalsh-annotations.git'
+    developerConnection 'scm:git@github.com:ndw/nwalsh-annotations.git'
+  }
 
-            pom.project {
-               name 'annotations'
-               packaging 'jar'
-               description 'A set of global, public annotations'
-               url 'https://github.com/ndw/nwalsh-annotations'
-
-               scm {
-                   url 'scm:git@github.com:ndw/nwalsh-annotations.git'
-                   connection 'scm:git@github.com:ndw/nwalsh-annotations.git'
-                   developerConnection 'scm:git@github.com:ndw/nwalsh-annotations.git'
-               }
-
-               licenses {
-                   license {
-                       name 'The Apache Software License, Version 2.0'
-                       url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                       distribution 'repo'
-                   }
-               }
-
-               developers {
-                   developer {
-                       id 'ndw'
-                       name 'Norman Walsh'
-                   }
-               }
-           }
-        }
+  licenses {
+    license {
+      name 'The Apache Software License, Version 2.0'
+      url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+      distribution 'repo'
     }
+  }
+
+  developers {
+    developer {
+      id 'ndw'
+      name 'Norman Walsh'
+    }
+  }
+}
+
+install {
+  repositories {
+    mavenInstaller {
+      pom.project(mavenPom)
+    }
+  }
+}
+
+uploadArchives {
+  repositories {
+    mavenDeployer {
+      beforeDeployment { MavenDeployment deployment ->
+        signing.signPom(deployment)
+      }
+
+      repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+        authentication(userName: sonatypeUsername, password: sonatypePassword)
+      }
+
+      snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+        authentication(userName: sonatypeUsername, password: sonatypePassword)
+      }
+
+      pom.project(mavenPom)
+    }
+  }
 }
