@@ -15,7 +15,10 @@ repositories {
 }
 
 dependencies {
-  compile (
+  compileOnly (
+    [group: 'org.atteo.classindex', name: 'classindex', version: '3.3'],
+  )
+  annotationProcessor (
     [group: 'org.atteo.classindex', name: 'classindex', version: '3.3'],
   )
 }
